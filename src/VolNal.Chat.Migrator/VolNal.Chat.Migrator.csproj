@@ -8,11 +8,15 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentMigrator" Version="3.3.2"/>
-        <PackageReference Include="FluentMigrator.Runner" Version="3.3.2"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0"/>
+        <PackageReference Include="FluentMigrator" Version="3.3.2" />
+        <PackageReference Include="FluentMigrator.Runner" Version="3.3.2" />
+        <PackageReference Include="Microsoft.Extensions.Configuration" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="7.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="7.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\VolNal.Chat.API\VolNal.Chat.API.csproj" />
     </ItemGroup>
 
 </Project>
