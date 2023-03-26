@@ -1,12 +1,15 @@
 .idea
 
+/src/Infrastructure/bin
+/src/Infrastructure/obj
+
+/src/JwtIdentity/obj
+/src/JwtIdentity/bin
+
 /src/VolNal.Chat.API/bin
 /src/VolNal.Chat.API/obj
 
 /src/VolNal.Chat.API/Logs
-
-/src/Infrastructure/bin
-/src/Infrastructure/obj
 
 /src/VolNal.Chat.Migrator/bin
 /src/VolNal.Chat.Migrator/obj
