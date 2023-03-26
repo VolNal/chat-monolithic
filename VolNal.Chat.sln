@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolNal.Chat.API", "src\VolNal.Chat.API\VolNal.Chat.API.csproj", "{24F046C7-F0EF-4C2A-A1FB-B4A30B9CF3D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{FBB6DF57-D3AC-4C3C-84BC-858E4804973B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolNal.Chat.Migrator", "src\VolNal.Chat.Migrator\VolNal.Chat.Migrator.csproj", "{3CAE2E14-15FD-4D46-849B-4F26BAC0153D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24F046C7-F0EF-4C2A-A1FB-B4A30B9CF3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24F046C7-F0EF-4C2A-A1FB-B4A30B9CF3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24F046C7-F0EF-4C2A-A1FB-B4A30B9CF3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24F046C7-F0EF-4C2A-A1FB-B4A30B9CF3D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB6DF57-D3AC-4C3C-84BC-858E4804973B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB6DF57-D3AC-4C3C-84BC-858E4804973B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB6DF57-D3AC-4C3C-84BC-858E4804973B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB6DF57-D3AC-4C3C-84BC-858E4804973B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CAE2E14-15FD-4D46-849B-4F26BAC0153D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CAE2E14-15FD-4D46-849B-4F26BAC0153D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CAE2E14-15FD-4D46-849B-4F26BAC0153D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CAE2E14-15FD-4D46-849B-4F26BAC0153D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
