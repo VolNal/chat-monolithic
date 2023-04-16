@@ -4,5 +4,5 @@ namespace VolNal.Chat.Api.DAL.Repositories.Interfaces;
 
 public interface IUserRepository
 {
-    public Task<UserDto> GetAsync(string email);
+    public Task<UserDto> GetAsync(UserDto user);
 }
