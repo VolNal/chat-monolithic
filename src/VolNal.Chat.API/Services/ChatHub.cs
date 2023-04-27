@@ -23,6 +23,6 @@ public class ChatHub : Hub
     [HubMethodName("privateMethod")]
     public async Task SendMessageToChatAsync(string chatName, string message)
     {
-        await Clients.Group(chatName).SendAsync("GetMessage", message);
+        await Clients.Group(chatName).SendAsync("PostMessage", message);
     }
 }
