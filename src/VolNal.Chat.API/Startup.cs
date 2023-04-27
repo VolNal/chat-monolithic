@@ -4,6 +4,7 @@ using VolNal.Chat.Api.DAL.Factories.Interfaces;
 using VolNal.Chat.Api.DAL.Repositories.Implementation;
 using VolNal.Chat.Api.DAL.Repositories.Interfaces;
 using VolNal.Chat.Api.Mapping;
+using VolNal.Chat.Api.Services;
 
 namespace VolNal.Chat.API;
 
@@ -21,12 +22,15 @@ public class Startup
         #region DataBase
 
         services.AddScoped<IDbConnectionFactory<SqlConnection>, MsConnectionFactory>();
+
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IChatRepository, ChatRepository>();
+        services.AddScoped<IMessageRepository, MessageRepository>();
 
         #endregion
 
         // services.AddMemoryCache();
-        // services.AddSignalR();
+        services.AddSignalR();
 
         services.AddAutoMapper(typeof(MappingProfile));
         services.AddControllers();
@@ -46,7 +50,7 @@ public class Startup
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            //endpoints.MapHub<Hub>("/hub");
+            endpoints.MapHub<ChatHub>("/hub");
             endpoints.MapDefaultControllerRoute();
         });
     }

@@ -29,11 +29,11 @@ public class UserControllerBase : ControllerBaseCastom
     {
         //TODO: проверить.
         //var email = User.Identities.FirstOrDefault(i=> i.Name = "email");
-        
+
         var user = await GetUserAsync();
         if (user == null)
             return Error("Invalid data in cookies.", new ErrorViewModel<GetChatsViewModel>());
-        
+
         var result = await _userRepository.GetAsync(user);
         return Ok(result);
     }
@@ -55,13 +55,13 @@ public class UserControllerBase : ControllerBaseCastom
 
         if (!IsValidPassword(model, out var errorPassword))
             return Error(errorPassword);
-        
+
         var mapUser = _mapper.Map<UserDto>(model);
-        
+
         var user = _userRepository.GetAsync(mapUser);
         if (user != null)
             return Error("User with this email already exists.", model);
-        
+
         await _userRepository.CreateAsync(model);
         return Ok();
     }
@@ -84,7 +84,7 @@ public class UserControllerBase : ControllerBaseCastom
 
         if (!IsValidPassword(model, out var errorPassword))
             return ErrorResult(errorPassword);
-        
+
         var user = _mapper.Map<UserDto>(model);
         var response = await _userRepository.GetAsync(user);
 

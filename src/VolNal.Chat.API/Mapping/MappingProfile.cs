@@ -1,6 +1,7 @@
 using AutoMapper;
 using VolNal.Chat.API.Controllers;
 using VolNal.Chat.Api.DAL.Models;
+using VolNal.Chat.Api.HttpModels.Message;
 using VolNal.Chat.Api.Mapping.Interfaces;
 
 namespace VolNal.Chat.Api.Mapping;
@@ -11,6 +12,8 @@ public class MappingProfile : Profile
     {
         //HttpModels => Commands
         CreateMap<AuthenticationUserViewModel, UserDto>();
+        CreateMap<GetMessagesViewModel, ChatDto>();
+        
         //CreateMap<IGetChatsViewModel, GetChatsCommand>().ReverseMap();
         //CreateMap<IChatViewModel, ChatDto>().ReverseMap();
         //CreateMap<IPostCreateChatViewModel, RequestCreateChatCommand>();

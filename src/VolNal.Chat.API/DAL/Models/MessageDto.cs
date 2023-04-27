@@ -1,5 +1,5 @@
 ﻿namespace VolNal.Chat.Api.DAL.Models;
-public class Message
+public class MessageDto
 {
     public int Id { get; set; }
     public int ChatId { get; set; }
