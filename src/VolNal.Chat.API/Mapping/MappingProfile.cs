@@ -1,4 +1,5 @@
 using AutoMapper;
+using JwtIdentity.Models.Interfaces;
 using VolNal.Chat.API.Controllers;
 using VolNal.Chat.Api.DAL.Models;
 using VolNal.Chat.Api.Mapping.Interfaces;
@@ -10,9 +11,10 @@ public class MappingProfile : Profile
     public MappingProfile()
     {
         //HttpModels => Commands
+        CreateMap<AuthorizeUserViewModel, UserDto>();
         CreateMap<AuthenticationUserViewModel, UserDto>();
-        //CreateMap<IGetChatsViewModel, GetChatsCommand>().ReverseMap();
-        //CreateMap<IChatViewModel, ChatDto>().ReverseMap();
+        CreateMap<UserDto, IIdentityUser>();
+        CreateMap<IPostCreateChatViewModel, ChatDto>();
         //CreateMap<IPostCreateChatViewModel, RequestCreateChatCommand>();
 
         //CreateMap<RequestCreateChatCommand, ResponseCreateChatCommand>().ReverseMap();

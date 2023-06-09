@@ -22,6 +22,7 @@ public class Startup
 
         services.AddScoped<IDbConnectionFactory<SqlConnection>, MsConnectionFactory>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IChatRepository, ChatRepository>();
 
         #endregion
 
@@ -42,8 +43,7 @@ public class Startup
                     .AllowAnyMethod()
                     .AllowCredentials();
             });
-
-        app.UseRouting();
+        
         app.UseEndpoints(endpoints =>
         {
             //endpoints.MapHub<Hub>("/hub");
