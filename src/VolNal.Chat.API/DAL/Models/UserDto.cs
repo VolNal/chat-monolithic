@@ -1,6 +1,8 @@
+using JwtIdentity.Models.Interfaces;
+
 namespace VolNal.Chat.Api.DAL.Models;
 
-public class UserDto
+public class UserDto:IIdentityUser
 {
     public int Id { get; set; }
     public string Name { get; set; }

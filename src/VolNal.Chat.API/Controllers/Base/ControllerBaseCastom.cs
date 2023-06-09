@@ -8,10 +8,8 @@ namespace VolNal.Chat.API.Controllers.Base;
 
 public class ControllerBaseCastom : ControllerBase
 {
-    private readonly IUserRepository _userRepository;
+    public readonly IUserRepository _userRepository;
 
-    public ControllerBaseCastom() { }
-    
     public ControllerBaseCastom(IUserRepository userRepository)
     {
         _userRepository = userRepository;

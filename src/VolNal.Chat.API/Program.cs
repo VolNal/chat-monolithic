@@ -10,6 +10,7 @@ static IHostBuilder CreateHostBuilder(string[] args)
 {
     return Host.CreateDefaultBuilder(args)
         .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); })
+        //TODO: Записать в диплом
         .AddInfrastructure()
         .AddJwtIdentity();
 }

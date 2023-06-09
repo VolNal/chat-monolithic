@@ -1,10 +1,13 @@
 ﻿using System.Text.RegularExpressions;
 using AutoMapper;
+using JwtIdentity.Services;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using VolNal.Chat.API.Controllers.Base;
 using VolNal.Chat.Api.DAL.Models;
 using VolNal.Chat.Api.DAL.Repositories.Implementation;
+using VolNal.Chat.Api.DAL.Repositories.Interfaces;
 using VolNal.Chat.API.HttpModels;
 
 namespace VolNal.Chat.API.Controllers;
@@ -12,30 +15,21 @@ namespace VolNal.Chat.API.Controllers;
 [AllowAnonymous]
 [ApiController]
 [Route("/api/user")]
-public class UserControllerBase : ControllerBaseCastom
+public class UserController : ControllerBaseCastom
 {
     private readonly IMapper _mapper;
-    private readonly UserRepository _userRepository;
+    private readonly PasswordManager _passwordManager;
+    private readonly JwtTokenService _jwtTokenService;
 
-    public UserControllerBase(IMapper mapper, UserRepository userRepository)
+    public UserController(IMapper mapper,
+        IUserRepository userRepository,
+        PasswordManager passwordManager,
+        JwtTokenService jwtTokenService) : base(userRepository)
     {
         _mapper = mapper;
-        _userRepository = userRepository;
-    }
 
-    [HttpGet]
-    [Authorize]
-    public async Task<IActionResult> Get()
-    {
-        //TODO: проверить.
-        //var email = User.Identities.FirstOrDefault(i=> i.Name = "email");
-        
-        var user = await GetUserAsync();
-        if (user == null)
-            return Error("Invalid data in cookies.", new ErrorViewModel<GetChatsViewModel>());
-        
-        var result = await _userRepository.GetAsync(user);
-        return Ok(result);
+        _passwordManager = passwordManager;
+        _jwtTokenService = jwtTokenService;
     }
 
     /// <summary>
@@ -55,14 +49,17 @@ public class UserControllerBase : ControllerBaseCastom
 
         if (!IsValidPassword(model, out var errorPassword))
             return Error(errorPassword);
-        
+
         var mapUser = _mapper.Map<UserDto>(model);
-        
-        var user = _userRepository.GetAsync(mapUser);
+
+        var user = await _userRepository.GetAsync(mapUser);
         if (user != null)
             return Error("User with this email already exists.", model);
-        
-        await _userRepository.CreateAsync(model);
+
+        var hash = _passwordManager.HashPassword(mapUser.Password);
+        mapUser.Password = hash;
+
+        await _userRepository.CreateAsync(mapUser);
         return Ok();
     }
 
@@ -84,7 +81,7 @@ public class UserControllerBase : ControllerBaseCastom
 
         if (!IsValidPassword(model, out var errorPassword))
             return ErrorResult(errorPassword);
-        
+
         var user = _mapper.Map<UserDto>(model);
         var response = await _userRepository.GetAsync(user);
 
@@ -93,7 +90,13 @@ public class UserControllerBase : ControllerBaseCastom
             return ErrorResult("Incorrectly entered data.", model);
         }
 
-        return Results.Json(response, statusCode: StatusCodes.Status200OK);
+        if (_passwordManager.VerifyPassword(response.Password, user.Password) == PasswordVerificationResult.Failed)
+        {
+            return ErrorResult("Incorrectly entered data.", model);
+        }
+
+        var token = _jwtTokenService.GetToken(response);
+        return Results.Json(token, statusCode: StatusCodes.Status200OK);
     }
 
     //TODO: вынести? в класс валидации модели контроллера.

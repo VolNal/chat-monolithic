@@ -11,20 +11,20 @@ public class UsersTable : Migration
             IF NOT EXISTS (
                 SELECT * FROM sys.tables t 
                 JOIN sys.schemas s ON (t.schema_id = s.schema_id) 
-                WHERE s.name = 'users') 	
-                CREATE TABLE users(
-                    id INT PRIMARY KEY IDENTITY,
-                    name nvarchar(50),
-                    email nvarchar(50),
-                    avatar varbinary(max),
-                    password nvarchar(50),
+                WHERE s.name = 'Users') 	
+                CREATE TABLE Users(
+                    Id INT PRIMARY KEY IDENTITY,
+                    Name nvarchar(50),
+                    Email nvarchar(50),
+                    Avatar varbinary(max),
+                    Password nvarchar(256),
                     );");
     }
 
     public override void Down()
     {
         Execute.Sql("IF EXISTS (" +
-                    "DROP TABLE dbo.users" +
+                    "DROP TABLE dbo.Users" +
                     ");");
     }
 }

@@ -11,13 +11,13 @@ public class MessagesTable:Migration
             IF NOT EXISTS (
                 SELECT * FROM sys.tables t 
                 JOIN sys.schemas s ON (t.schema_id = s.schema_id) 
-                WHERE s.name = 'messages') 	
-                CREATE TABLE messages(
-                    id INT PRIMARY KEY IDENTITY,
-                    chat_id INT,
-                    user_id INT,
-                    content TEXT,
-                    date date
+                WHERE s.name = 'Messages') 	
+                CREATE TABLE Messages(
+                    Id INT PRIMARY KEY IDENTITY,
+                    ChatId INT,
+                    UserId INT,
+                    Content TEXT,
+                    Date date
                     );");
     }
 
@@ -25,7 +25,7 @@ public class MessagesTable:Migration
     public override void Down()
     {
         Execute.Sql("IF EXISTS (" +
-                    "DROP TABLE dbo.messages" +
+                    "DROP TABLE dbo.Messages" +
                     ");");
     }
 }

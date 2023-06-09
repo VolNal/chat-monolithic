@@ -1,40 +1,39 @@
-using Dapper;
+﻿using Dapper;
 using Microsoft.Data.SqlClient;
-using VolNal.Chat.API.Controllers;
 using VolNal.Chat.Api.DAL.Factories.Interfaces;
 using VolNal.Chat.Api.DAL.Models;
 using VolNal.Chat.Api.DAL.Repositories.Interfaces;
 
 namespace VolNal.Chat.Api.DAL.Repositories.Implementation;
 
-public class UserRepository : IUserRepository
+public class ChatRepository : IChatRepository
 {
     private readonly IDbConnectionFactory<SqlConnection> _dbConnectionFactory;
 
-    public UserRepository(IDbConnectionFactory<SqlConnection> dbConnectionFactory)
+    public ChatRepository(IDbConnectionFactory<SqlConnection> dbConnectionFactory)
     {
         _dbConnectionFactory = dbConnectionFactory;
     }
-
-    public async Task<UserDto> GetAsync(UserDto user)
+    
+    public async Task<List<ChatDto>> GetAsync(UserDto user)
     {
-        var sql = @"SELECT * FROM Users WHERE Email = @Email";
+        var sql = @"SELECT * FROM Chats WHERE CreatorId = @Id";
 
         var connection = await _dbConnectionFactory.CreateConnection();
-        var result = await connection.QueryAsync<UserDto>(sql, new {user.Email});
+        var result = await connection.QueryAsync<ChatDto>(sql, new {user.Id});
 
-        return result.FirstOrDefault();
+        return result.ToList();
     }
-
-    public async Task<UserDto> CreateAsync(UserDto user)
+    
+    public async Task<ChatDto> CreateAsync(ChatDto chat)
     {
         var sql =
-            "INSERT INTO Users " +
+            "INSERT INTO Chats " +
             "OUTPUT INSERTED.* " +
-            "VALUES(@Name, @Email, @Avatar, @Password)";
+            "VALUES(@Name, @Description, @Avatar, @CreatorId, @Type)";
 
         var connection = await _dbConnectionFactory.CreateConnection();
-        var result = await connection.QueryAsync<UserDto>(sql, user);
+        var result = await connection.QueryAsync<ChatDto>(sql, chat);
 
         return result.FirstOrDefault();
     }

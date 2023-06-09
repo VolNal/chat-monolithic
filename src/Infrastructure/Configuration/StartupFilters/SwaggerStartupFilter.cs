@@ -11,6 +11,7 @@ public class SwaggerStartupFilter : IStartupFilter
         {
             app.UseSwagger();
             app.UseSwaggerUI();
+            app.UseRouting();
             next(app);
         };
     }

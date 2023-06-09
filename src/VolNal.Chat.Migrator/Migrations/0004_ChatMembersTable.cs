@@ -11,11 +11,11 @@ public class ChatMembersTable:Migration
             IF NOT EXISTS (
                 SELECT * FROM sys.tables t 
                 JOIN sys.schemas s ON (t.schema_id = s.schema_id) 
-                WHERE s.name = 'chat_members') 	
-                CREATE TABLE messages(
-                    id INT PRIMARY KEY IDENTITY,
-                    user_id INT,
-                    chat_id INT
+                WHERE s.name = 'ChatMembers') 	
+                CREATE TABLE ChatMembers(
+                    Id INT PRIMARY KEY IDENTITY,
+                    User_id INT,
+                    ChatId INT
                     );");
     }
 
@@ -23,7 +23,7 @@ public class ChatMembersTable:Migration
     public override void Down()
     {
         Execute.Sql("IF EXISTS (" +
-                    "DROP TABLE dbo.chat_members" +
+                    "DROP TABLE dbo.ChatMembers" +
                     ");");
     }
 }
